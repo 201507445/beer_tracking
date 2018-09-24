@@ -35,7 +35,7 @@
                         <h2>Keeping Track Of Everyone's Favourite Beer</h2>
                         <div class="row beer-container">
                             <div class="col-md-3 beer"> 
-                                <div class="text-center"><b>Hansa</b></div>
+                                <div id="beers"class="text-center"><b>Hansa</b></div>
                                 <p><b>Ibu:</b> <span>lorem text</span></p>
                                 <p><b>Ibv:</b> <span>lorem text</span></p>
                                 <p><b>Style:</b> <span>lorem text</span></p>
