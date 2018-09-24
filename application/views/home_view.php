@@ -34,27 +34,7 @@
                         <h1>Beer Tracking System</h1>
                         <h2>Keeping Track Of Everyone's Favourite Beer</h2>
                         <div class="row beer-container">
-                            <div class="col-md-3 beer"> 
-                                
-                            </div>
-                            <div class="col-md-3 beer"> 
-                                
-                               
-                                
-                            </div>
-                            <div class="col-md-3 beer"> 
-                                
-                                
-                            </div>
-                            <div class="col-md-3 beer"> 
-                                
-                            </div>
-                            <div class="col-md-3 beer"> 
-                                
-                            </div>
-                            <div class="col-md-3 beer"> 
-                                
-                            </div>
+                            
                         </div>
                         <div class="beer-pagination">
                             <nav aria-label="Page navigation">
