@@ -10,15 +10,22 @@
     <body>
         <div class="container-fluid p-0">
             <header class="blogHeader pageHeader">
-                <nav>
+                <nav class="navbar">
                     <h1><a href="#" title="home">Canpango</a></h1>
-                    <ul>
-                        <li><a href="#" title="Home">Home</a></li>
-                        <li><a href="#" title="About">About</a></li>
-                        <li><a href="#" title="Careers">Careers</a></li>
-                        <li><a href="#" title="Contact">Contact</a></li>
-                        <li><a href="#" title="Blog">Blog</a></li>
-                    </ul>
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#top-collapse" aria-expanded="false">    <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="top-collapse">
+                        <ul>
+                            <li><a href="#" title="Home">Home</a></li>
+                            <li><a href="#" title="About">About</a></li>
+                            <li><a href="#" title="Careers">Careers</a></li>
+                            <li><a href="#" title="Contact">Contact</a></li>
+                            <li><a href="#" title="Blog">Blog</a></li>
+                        </ul>
+                    </div>
                 </nav>
             </header>
             <div class="container" id="contentWrapper">
@@ -28,105 +35,133 @@
                         <h2>Keeping Track Of Everyone's Favourite Beer</h2>
                         <div class="row beer-container">
                             <div class="col-md-3 beer"> 
-                                <p class="text-center"><b>Beer Name</b></p>
-                                <p>Ibu:</p>
-                                <p>Ibv:</p>
-                                <p>Style:</p>
-                                <p>Location:</p>
-                                <p>Ibu:</p>
-                                <a href="#">Reviews</a>
+                                <div class="text-center"><b>Hansa</b></div>
+                                <p><b>Ibu:</b> <span>lorem text</span></p>
+                                <p><b>Ibv:</b> <span>lorem text</span></p>
+                                <p><b>Style:</b> <span>lorem text</span></p>
+                                <p><b>Location:</b> <span>South Africa</span></p>
+                                <div class="beer-review-link"><a href="#">Reviews</a></div>
                             </div>
                             <div class="col-md-3 beer"> 
-                                <p class="text-center"><b>Beer Name</b></p>
-                                <p>Ibu:</p>
-                                <p>Ibv:</p>
-                                <p>Style:</p>
-                                <p>Location:</p>
-                                <p>Ibu:</p>
-                                <a href="#">Reviews</a>
+                                <div class="text-center"><b>Strong Bow</b></div>
+                                <p><b>Ibu:</b> <span>lorem text</span></p>
+                                <p><b>Ibv:</b> <span>lorem text</span></p>
+                                <p><b>Style:</b> <span>lorem text</span></p>
+                                <p><b>Location:</b> <span>South Africa</span></p>
+                                <div class="beer-review-link"><a href="#">Reviews</a></div>
                             </div>
                             <div class="col-md-3 beer"> 
-                                <p class="text-center"><b>Beer Name</b></p>
-                                <p>Ibu:</p>
-                                <p>Ibv:</p>
-                                <p>Style:</p>
-                                <p>Location:</p>
-                                <p>Ibu:</p>
-                                <a href="#">Reviews</a>
+                                <div class="text-center"><b>Castle Lite</b></div>
+                                <p><b>Ibu:</b> <span>lorem text</span></p>
+                                <p><b>Ibv:</b> <span>lorem text</span></p>
+                                <p><b>Style:</b> <span>lorem text</span></p>
+                                <p><b>Location:</b> <span>South Africa</span></p>
+                                <div class="beer-review-link"><a href="#">Reviews</a></div>
                             </div>
                             <div class="col-md-3 beer"> 
-                                <p class="text-center"><b>Beer Name</b></p>
-                                <p>Ibu:</p>
-                                <p>Ibv:</p>
-                                <p>Style:</p>
-                                <p>Location:</p>
-                                <p>Ibu:</p>
-                                <a href="#">Reviews</a>
+                                <div class="text-center"><b>Amstel Lager</b></div>
+                                <p><b>Ibu:</b> <span>lorem text</span></p>
+                                <p><b>Ibv:</b> <span>lorem text</span></p>
+                                <p><b>Style:</b> <span>lorem text</span></p>
+                                <p><b>Location:</b> <span>South Africa</span></p>
+                                <div class="beer-review-link"><a href="#">Reviews</a></div>
                             </div>
                             <div class="col-md-3 beer"> 
-                                <p class="text-center"><b>Beer Name</b></p>
-                                <p>Ibu:</p>
-                                <p>Ibv:</p>
-                                <p>Style:</p>
-                                <p>Location:</p>
-                                <p>Ibu:</p>
-                                <a href="#">Reviews</a>
+                                <div class="text-center"><b>Black Label</b></div>
+                                <p><b>Ibu</b> <span>lorem text</span></p>
+                                <p><b>Ibv</b> <span>lorem text</span></p>
+                                <p><b>Style</b> <span>lorem text</span></p>
+                                <p><b>Location</b> <span>South Africa</span></p>
+                                <div class="beer-review-link"><a href="#">Reviews</a></div>
                             </div>
                             <div class="col-md-3 beer"> 
-                                <p class="text-center"><b>Beer Name</b></p>
-                                <p>Ibu:</p>
-                                <p>Ibv:</p>
-                                <p>Style:</p>
-                                <p>Location:</p>
-                                <p>Ibu:</p>
-                                <a href="#">Reviews</a>
+                                <div class="text-center"><b>Castle Lager</b></div>
+                                <p><b>Ibu:</b> <span>lorem text</span></p>
+                                <p><b>Ibv:</b> <span>lorem text</span></p>
+                                <p><b>Style:</b> <span>lorem text</span></p>
+                                <p><b>Location:</b> <span>South Africa</span></p>
+                                <div class="beer-review-link"><a href="#">Reviews</a></div>
                             </div>
                         </div>
-                        <div class="pagination">
-                            <a href="#">&laquo;</a>
-                            <a class="active" href="#">1</a>
-                            <a href="#">2</a>
-                            <a href="#">3</a>
-                            <a href="#">&raquo;</a>
+                        <div class="beer-pagination">
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination">
+                                    <li>
+                                      <a href="#" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                      </a>
+                                    </li>
+                                    <li class="active"><a href="#">1</a></li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a href="#">4</a></li>
+                                    <li><a href="#">5</a></li>
+                                    <li>
+                                      <a href="#" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                      </a>
+                                    </li>
+                                </ul>
+                            </nav>
                         </div>
                         
-                        <form class="form-inline">
-                            <fieldset>
-                                <legend><h3>Add New Beer</h3></legend>
-                                <div class="form-group">
-                                    <label for="name">Beer Name</label>
-                                    <input type="text" id="name">
-                                    <label for="ibu">Ibu</label>
-                                    <input type="text" id="ibu">
-                                </div>
-                                <hr>
-                                <div class="form-group">
-                                    <label for="ibv">Ibv</label>
-                                    <input type="text" id="ibv">
-                                    <label for="location">Brewery Location</label>
-                                    <input type="text" id="location">
-                                </div>
-                                <hr>
-                                <label>Category</label>
-                                <select>
-                                    <option>Brian  Beers</option>
-                                    <option>B</option>
-                                    <option>C</option>
-                                    <option>D</option>
-                                </select>
-
-                                <input class="btn btn-primary" type="button" value="Add Beer">
-                            </fieldset>
-                        </form>
+                        <div>
+                            <form action="" method="post" id="addBeer-form">
+                                <fieldset>
+                                    <legend><h3>Add New Beer</h3></legend>
+                                    <div class="row">
+                                        <div class="col-md-6 col-xs-12">
+                                            <label for="name">Beer Name</label>
+                                            <input name="beer_name" class="form-control" type="text" id="name" placeholder="Enter name of beer">
+                                        </div>
+                                        <div class="col-md-6 col-xs-12">
+                                            <label for="ibu">Ibu</label>
+                                            <input name="ibu" class="form-control" type="text" id="ibu" placeholder="Enter Ibu">
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-md-6 col-xs-12">
+                                            <label for="ibv">Ibv</label>
+                                            <input name="ibv" class="form-control" type="text" id="ibv" placeholder="Enter Ibv">
+                                        </div>
+                                        <div class="col-md-6 col-xs-12">
+                                            <label for="location">Brewery Location</label>
+                                            <input name="location" class="form-control" type="text" id="location" placeholder="Brewery Location">
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-md-6 col-xs-12">
+                                            <label for="category">Category</label>
+                                            <select id="category" name="category" class="form-control">
+                                                <option value="">Select beer category</option>
+                                                <option value="B">B</option>
+                                                <option value="C">C</option>
+                                                <option value="D">D</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 col-xs-12">
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="addBeer-bottom">
+                                        <button class="btn btn-primary" type="button">Add Beer</button>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
                     </main>
                     <aside class="col-md-3">
                         <section class="info">
                             <div class="widget">
                                 <h2>Search</h2>
-                                <form>
-                                    <input type="search" id="searchField" placeholder="Search Beer" />
-                                    <input type="submit" name="search" id="search" value="">
-                                </form>
+                                <div class="side-search">
+                                    <form action="" method="post">                                        
+                                        <input type="search" id="searchField" class="form-control" placeholder="Search Beer" aria-describedby="search-beer">
+                                        <button type="submit" name="search-beer" id="search-beer"><i class="fa fa-search"></i></button>
+                                    </form>
+                                </div>
                             </div>
                             <div class="widget">
                                 <h2>Categories</h2>
@@ -136,7 +171,7 @@
                 </div>
             </div>
             <footer id="pageFooter" class="cf">
-                <p>&copy;Copyright  Sihle Socishe.  All rights reserved.</p>
+                <p>&copy; Copyright, Sihle Socishe. All Rights Reserved.</p>
             </footer>
         </div>
         <?php include 'assets/includes/scripts.php'; ?>

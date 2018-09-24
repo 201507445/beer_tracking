@@ -15,6 +15,10 @@ html {
 body {
     font-family: 'Roboto', sans-serif;
     line-height: 1.5;
+    color: rgb(82, 82, 82);
+}
+*{
+    outline: none !important;
 }
 a {
     color: white;
@@ -27,6 +31,7 @@ p {
 main#mainContent {
     background: white;
     padding: 16px;
+    padding-bottom: 60px;
     position: relative;
 }
 main#mainContent:before{
@@ -80,13 +85,14 @@ aside {
 }
 .pageHeader li {
     display: inline-block;
-    margin-right: 45px;
+    margin-right: 35px;
     line-height: 2.5;
 }
 .pageHeader a {
     color: white;
     text-decoration: none;
-    font-size: .9em;
+    font-size: 18px;
+    font-weight: 300;
 }
 .pageHeader a:hover {
     color: rgb(251, 174, 44);
@@ -103,16 +109,14 @@ aside {
 
 /*info section styles*/
 section.info {
-    width: 318px;
-    margin: 3px 3px 0 0;
-    float: left;
+    width: 100%;
 }
 section.info h2 {
     color: white;
     background: url(../img/diag_pattern.png);
-    line-height: 45px;
+    line-height: 43px;
     padding-left: .6em;
-    font-size: 1.6em;
+    font-size: 20px;
     font-weight: 100;
 }
 
@@ -132,52 +136,55 @@ main h2 {
     margin-bottom: .5em;
     margin-top: 0;
 }
-.pagination a.active{
-    background-color: #4cae4c;
-    color: white;
+
+.beer-pagination{
+    text-align: center;
 }
-.pagination a{
-    color: black;
-    float: left;
-    padding: 8px 16px;
-    text-decoration: none;
-    transition: background-color .3s;
-    border-radius: 5px;
-}
-/*spotlight gallery styles */
 
 input[type="search"] {
-    border: none;
-    background-color: rgb(249, 228, 130);
-    padding: .5em;
-    font-size: 1em;
-    margin-left: 1em;
+    background-color: rgba(255, 255, 255, 0.67);
+    padding: 7px 35px 7px 10px;
+    transition: background-color 0.2s ease-in-out;
+    border-color: #9e579a;
 }
-
-input[type="submit"] {
-    background: url(../img/search.png) no-repeat center center;
-    border: none;
-    cursor: pointer;
-    width: 35px;
-    height: 35px;
-    padding: 0;
-    margin-top: -10px;
-    vertical-align: bottom;
+input[type="search"]:focus{
+    box-shadow: none;
+    border-color: #9e579a;
 }
-
+input[type="search"]:focus, input[type="search"]:hover{
+    background-color: rgba(255, 255, 255, 1);
+}
+.side-search{
+    position: relative;
+    margin-bottom: 30px;
+    margin-top: 20px;
+}
+.side-search button{
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    height: 95%;
+    border: none;
+    width: 32.3px;
+    background-color: #fbfbfb;
+    border-radius: 0 3px 3px 0;
+    border-left: 1px solid rgba(123, 41, 118, 0.26);
+    transition: background-color 0.2s ease-in-out;
+}
+.side-search button:hover{
+    background-color: #ecd9eb;
+}
 /*footer styles	*/
-footer#pageFooter {
-    background: rgb(249, 228, 130);
-    color: rgb(65, 64, 66);
-    padding: 32px 0 16px;
+footer{
+    background-color: rgb(51, 51, 51);
+    color: #efefef;
+    padding: 32px 0 40px;
 }
 
 footer p {
-    font-size: .9em;
+    font-size: 12px;
     text-align: center;
-    clear: both;
 }
-
 #contentWrapper {
     background-color: #a95fa4;
     overflow: hidden;
@@ -191,23 +198,71 @@ footer p {
     margin-right: 20px;
     margin-bottom: 20px;
     margin-top: 20px;
-    padding: 15px;
+    padding: 15px 25px;
     box-shadow: 0px 1px 7px rgba(0, 0, 0, 0.23);
     border-radius: 10px;
+    cursor: pointer;
     float: none;
+    transition: box-shadow 0.2s ease-in-out;
+}
+.beer:hover{
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.38);
+}
+.beer:active{
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.23);
 }
 .beer a{
-    float: right;
+    text-align: right;
     text-decoration: none;
-    color: blue;
+    color: #4444ff;
+    font-size: 15px;
 }
 .beer a:hover{
     text-decoration: underline;
 }
+.beer p{
+    margin-bottom: 0px;
+    text-align: left;
+    font-weight: 500;
+    font-size: 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.beer > div.text-center{
+    text-align: center;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-bottom: 7px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #f1efef;
+}
+.beer .beer-review-link{
+    text-align: right;
+}
+.beer p span{
+    font-weight: 400;
+} 
+@media (max-width: 630px){
+    .beer{
+        margin-right: 13px;
+        margin-bottom: 2px;
+    }
+}
+@media (max-width: 475px){
+    .beer{
+        width: 80%;
+        margin-right: 0;
+    }
+}
 #mainContent h3{
     text-align: center;
-    font-weight: bolder;
+    font-weight: 500;
     margin-top: 0px;
+    font-size: 22px;
+    padding-top: 9px;
 }
 input[type="button"]{
     float: right;
@@ -217,9 +272,67 @@ legend{
     border: none;
 }
 fieldset{
-    border: solid 1px #DDD !important;
-    padding: 0 10px 10px 10px;
+    border: solid 1px #e6e6e6 !important;
+    padding: 0 20px 25px;
+    border-radius: 3px;
 }
 legend h3{
     margin-top: -5px;
+}
+fieldset label{
+    font-weight: 400;
+    font-size: 15px;
+}
+fieldset input, fieldset select{
+    border-color: #d8d6d6 !important;
+
+}
+fieldset input:focus, fieldset select:focus{
+    box-shadow: none !important;
+    border-color: #c1c1c1 !important;
+}
+select.form-control{
+    display: inline-block;
+    width: 100%;
+    height: calc(2.25rem + 2px);
+    padding: .375rem 1.75rem .375rem .75rem;
+    line-height: 1.5;
+    color: #495057;
+    vertical-align: middle;
+    background: #fff url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E") no-repeat right .75rem center;
+    background-size: auto auto;
+    background-size: 8px 10px;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    border-top-left-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+    border-top-left-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    font-size: inherit;
+}
+.addBeer-bottom{
+    margin-top: 15px;
+    text-align: right;
+}
+@media (max-width: 991px){
+    fieldset .col-md-6{
+        margin-bottom: 8px;
+    }
+    aside{
+        padding: 0 16px;
+        margin-bottom: 60px;
+    }
+    #contentWrapper{
+        background-color: transparent;
+    }
+    section.info{
+        padding: 16px;
+        background-color: #a95fa4;
+    }
+}
+button.navbar-toggle .icon-bar{
+    background-color: #fff;
 }
