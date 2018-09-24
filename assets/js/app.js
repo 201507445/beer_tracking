@@ -12,4 +12,18 @@ $(document).ready(function () {
             $('.beer-container').append(html);
         }
     });
+  
 });
+  document.getElementById('addBeer-form').addEventListener('button', function (e) {
+        e.preventDefault();
+         var tempValue = document.querySelector('input[name="name"]').value;
+            addNewItem({
+                "name": tempValue
+               
+            });
+            console.log(tempValue);
+        /*var info = {};//create an empty object
+        info.name = document.getElementById('name').value;
+        info.ibu = document.getElementById('ibu').value;
+        console.log(info.name);*/
+    });

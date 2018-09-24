@@ -75,12 +75,12 @@
                                     <hr>
                                     <div class="row">
                                         <div class="col-md-6 col-xs-12">
-                                            <label for="ibv">Ibv</label>
-                                            <input name="ibv" class="form-control" type="text" id="ibv" placeholder="Enter Ibv">
+                                            <label for="ibv">Abv</label>
+                                            <input name="ibv" class="form-control" type="text" id="abv" placeholder="Enter Ibv">
                                         </div>
                                         <div class="col-md-6 col-xs-12">
-                                            <label for="location">Brewery Location</label>
-                                            <input name="location" class="form-control" type="text" id="location" placeholder="Brewery Location">
+                                            <label for="brewery_location">Brewery Location</label>
+                                            <input name="location" class="form-control" type="text" id="brewery_location" placeholder="Brewery Location">
                                         </div>
                                     </div>
                                     <hr>
