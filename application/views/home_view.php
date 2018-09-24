@@ -35,52 +35,25 @@
                         <h2>Keeping Track Of Everyone's Favourite Beer</h2>
                         <div class="row beer-container">
                             <div class="col-md-3 beer"> 
-                                <div id="beers"class="text-center"><b>Hansa</b></div>
-                                <p><b>Ibu:</b> <span>lorem text</span></p>
-                                <p><b>Ibv:</b> <span>lorem text</span></p>
-                                <p><b>Style:</b> <span>lorem text</span></p>
-                                <p><b>Location:</b> <span>South Africa</span></p>
-                                <div class="beer-review-link"><a href="#">Reviews</a></div>
+                                
                             </div>
                             <div class="col-md-3 beer"> 
-                                <div class="text-center"><b>Strong Bow</b></div>
-                                <p><b>Ibu:</b> <span>lorem text</span></p>
-                                <p><b>Ibv:</b> <span>lorem text</span></p>
-                                <p><b>Style:</b> <span>lorem text</span></p>
-                                <p><b>Location:</b> <span>South Africa</span></p>
-                                <div class="beer-review-link"><a href="#">Reviews</a></div>
+                                
+                               
+                                
                             </div>
                             <div class="col-md-3 beer"> 
-                                <div class="text-center"><b>Castle Lite</b></div>
-                                <p><b>Ibu:</b> <span>lorem text</span></p>
-                                <p><b>Ibv:</b> <span>lorem text</span></p>
-                                <p><b>Style:</b> <span>lorem text</span></p>
-                                <p><b>Location:</b> <span>South Africa</span></p>
-                                <div class="beer-review-link"><a href="#">Reviews</a></div>
+                                
+                                
                             </div>
                             <div class="col-md-3 beer"> 
-                                <div class="text-center"><b>Amstel Lager</b></div>
-                                <p><b>Ibu:</b> <span>lorem text</span></p>
-                                <p><b>Ibv:</b> <span>lorem text</span></p>
-                                <p><b>Style:</b> <span>lorem text</span></p>
-                                <p><b>Location:</b> <span>South Africa</span></p>
-                                <div class="beer-review-link"><a href="#">Reviews</a></div>
+                                
                             </div>
                             <div class="col-md-3 beer"> 
-                                <div class="text-center"><b>Black Label</b></div>
-                                <p><b>Ibu</b> <span>lorem text</span></p>
-                                <p><b>Ibv</b> <span>lorem text</span></p>
-                                <p><b>Style</b> <span>lorem text</span></p>
-                                <p><b>Location</b> <span>South Africa</span></p>
-                                <div class="beer-review-link"><a href="#">Reviews</a></div>
+                                
                             </div>
                             <div class="col-md-3 beer"> 
-                                <div class="text-center"><b>Castle Lager</b></div>
-                                <p><b>Ibu:</b> <span>lorem text</span></p>
-                                <p><b>Ibv:</b> <span>lorem text</span></p>
-                                <p><b>Style:</b> <span>lorem text</span></p>
-                                <p><b>Location:</b> <span>South Africa</span></p>
-                                <div class="beer-review-link"><a href="#">Reviews</a></div>
+                                
                             </div>
                         </div>
                         <div class="beer-pagination">
