@@ -74,6 +74,7 @@ $(document).ready(function () {
         }
     });
 
+
     $('.beer-pagination li a').click(function(event){
         event.preventDefault();
     });
@@ -86,4 +87,12 @@ $(document).ready(function () {
 	//         console.log(data);
 	//     }
 	// });
+
+    $.getJSON("http://apichallenge.canpango.com/categories/", function (cat) {
+        for (var i = 0; i < cat.length; i++) {
+            var html = '';
+            html += '<option value="'+cat[i] +'">' + cat[i].name + '</option>';
+            $('#category').append(html);
+        }
+    });
 });
