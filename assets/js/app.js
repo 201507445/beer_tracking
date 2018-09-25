@@ -243,8 +243,17 @@ $(document).ready(function () {
                 data: $(this).serialize(),
                 type: 'post',
                 dataType:'json',
+                error: function(){
+                    $('.form-error').html('<div>Something went wrong, please try again</div>');
+                    $('.addBeer-bottom button').removeClass('disabled').attr('disabled', false);
+                },
+                beforeSend: function(){
+                    $('.addBeer-bottom button').addClass('disabled').attr('disabled', true);
+                },
                 success: function(r){
                     console.log(r)
+                    $('.addBeer-bottom button').removeClass('disabled').attr('disabled', false);
+                    
                 }
             });  
         }else{

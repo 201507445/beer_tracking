@@ -5,7 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Canpango's Beer Tracking System</title>
-        <?php include 'assets/includes/links.php'; ?>
+        <?php 
+        $other_styles = '<link rel="stylesheet" type="text/css" href="'.base_url('assets/src/alertify/themes/alertify.bootstrap.css').'">';
+        include 'assets/includes/links.php'; ?>
     </head>
     <body>
         <div class="container-fluid p-0">
@@ -136,6 +138,8 @@
                 <p>&copy; Copyright, Sihle Socishe. All Rights Reserved.</p>
             </footer>
         </div>
-        <?php include 'assets/includes/scripts.php'; ?>
+        <?php 
+        $other_scripts = '<script type="text/javascript" src="'.base_url('assets/src/alertify/lib/alertify.min.js').'"></script>';
+        include 'assets/includes/scripts.php'; ?>
     </body>
 </html>
