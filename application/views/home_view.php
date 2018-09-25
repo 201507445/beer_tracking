@@ -34,14 +34,14 @@
                         <h1>Beer Tracking System</h1>
                         <h2>Keeping Track Of Everyone's Favourite Beer</h2>
                         <div class="row beer-container">
-                            
+
                         </div>
                         <div class="beer-pagination">
                             <nav aria-label="Page navigation">
                                 <ul class="pagination"></ul>
                             </nav>
                         </div>
-                        
+
                         <div>
                             <form action="" method="post" id="addBeer-form">
                                 <fieldset>
@@ -76,7 +76,7 @@
                                             </select>
                                         </div>
                                         <div class="col-md-6 col-xs-12">
-                                            
+
                                         </div>
                                     </div>
                                     <div class="addBeer-bottom">
@@ -99,6 +99,9 @@
                             </div>
                             <div class="widget">
                                 <h2>Categories</h2>
+                                <ul id="cat">
+
+                                </ul>
                             </div>
                         </section>
                     </aside>

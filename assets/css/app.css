@@ -344,3 +344,13 @@ button.navbar-toggle .icon-bar{
     cursor: default;
     color: #d2d2d2;
 }
+.widget ul li{
+    list-style: square;
+
+    margin-bottom: 0px;
+
+    color: #fff;
+}
+.widget ul{
+    padding-left: 3px;
+}
