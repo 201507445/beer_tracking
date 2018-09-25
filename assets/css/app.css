@@ -336,3 +336,7 @@ select.form-control{
 button.navbar-toggle .icon-bar{
     background-color: #fff;
 }
+.beer-placeholder{
+    min-height: 202px;
+    min-width: 218.88px;
+}
