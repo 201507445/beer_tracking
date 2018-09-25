@@ -353,4 +353,15 @@ button.navbar-toggle .icon-bar{
 }
 .widget ul{
     padding-left: 3px;
+    overflow: auto;
+    height: 200px;
+    margin: 0 !important;
+}
+.form-error > div{
+    padding: 12px 20px;
+    background-color: #ff7c7c;
+    color: #fff;
+    border-radius: 3px;
+    margin-bottom: 13px;
+    font-size: 13px;
 }

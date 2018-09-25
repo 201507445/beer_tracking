@@ -47,40 +47,54 @@
                                 <fieldset>
                                     <legend><h3>Add New Beer</h3></legend>
                                     <div class="row">
+                                        <div class="col-md-12 form-error"></div>
+                                    </div>
+                                    <div class="row">
                                         <div class="col-md-6 col-xs-12">
                                             <label for="name">Beer Name</label>
-                                            <input name="beer_name" class="form-control" type="text" id="name" placeholder="Enter name of beer">
+                                            <input name="name" required="1" class="form-control" type="text" id="name" placeholder="Enter name of beer">
                                         </div>
                                         <div class="col-md-6 col-xs-12">
                                             <label for="ibu">Ibu</label>
-                                            <input name="ibu" class="form-control" type="text" id="ibu" placeholder="Enter Ibu">
+                                            <input name="ibu" required="1" class="form-control" type="text" id="ibu" placeholder="Enter Ibu">
                                         </div>
                                     </div>
                                     <hr>
                                     <div class="row">
                                         <div class="col-md-6 col-xs-12">
-                                            <label for="ibv">Abv</label>
-                                            <input name="ibv" class="form-control" type="text" id="abv" placeholder="Enter Ibv">
+                                            <label for="abv">Abv</label>
+                                            <input name="abv" required="1" class="form-control" type="text" id="abv" placeholder="Enter Ibv">
                                         </div>
                                         <div class="col-md-6 col-xs-12">
                                             <label for="brewery_location">Brewery Location</label>
-                                            <input name="location" class="form-control" type="text" id="brewery_location" placeholder="Brewery Location">
+                                            <input name="brewery_location" required="1" class="form-control" type="text" id="brewery_location" placeholder="Brewery Location">
                                         </div>
                                     </div>
                                     <hr>
                                     <div class="row">
                                         <div class="col-md-6 col-xs-12">
                                             <label for="category">Category</label>
-                                            <select id="category" name="category" class="form-control">
+                                            <select id="category" required="1" name="category" class="form-control">
                                                 <option value="">Select beer category</option>
                                             </select>
                                         </div>
                                         <div class="col-md-6 col-xs-12">
-
+                                            <label for="style">Style</label>
+                                            <input name="style" required="1" class="form-control" type="text" id="style" placeholder="Beer style">
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-md-6 col-xs-12">
+                                            <label for="calories">Calories</label>
+                                           <input name="calories" required="1" value="1" class="form-control" type="number" id="calories" placeholder="Calories in the beer">
+                                        </div>
+                                        <div class="col-md-6 col-xs-12">
+                                            
                                         </div>
                                     </div>
                                     <div class="addBeer-bottom">
-                                        <button class="btn btn-primary" type="button">Add Beer</button>
+                                        <button class="btn btn-primary" type="submit">Add Beer</button>
                                     </div>
                                 </fieldset>
                             </form>

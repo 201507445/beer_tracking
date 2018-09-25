@@ -13,9 +13,14 @@ $(document).ready(function () {
     beer_placeholder = function(){
         return '<div class="col-md-3 beer beer-placeholder"></div>';
     };
-    var last_count = 0,element_count = 0, page_increase = 0;
+    var last_count = 0,element_count = 0, page_increase = 0,
+    category = window.location.search,
+    category_id = 0,
+    url = '';
+    category = category.replace('?', '').split('=');
+    category_id = (category[1] !== undefined)? category[1]:0;
     $.ajax({
-        url: "http://apichallenge.canpango.com/beers",
+        url: "http://apichallenge.canpango.com/beers/",
         dataType: 'json',
         beforeSend: function(){
             $('.beer-pagination ul li').addClass('disabled');
@@ -24,7 +29,6 @@ $(document).ready(function () {
             }
         },
         success: function(beer){
-            // console.log(beer);
             $('.beer-container').html('');
             // Display 5 beers per page
             var count = 0, add_page = '', page_num = 0,
@@ -33,17 +37,28 @@ $(document).ready(function () {
                 },
                 active = '',
                 page_num_struct = '',
-                content_count = 0;
-                
+                content_count = 0,
+                beer_count = 0,
+                category_url = '';
+
             $.each(beer, function(index, i){
                 count++;
                 if(count > 9){
                     add_page = 'hide';
                 }
-                $('.beer-container').append(beer_struct(i, add_page));
+                if(category_id !== 0){
+                    category_url = "http://apichallenge.canpango.com/category/"+category_id+'/';
+                    if(i.category == category_url){
+                        beer_count++;
+                        $('.beer-container').append(beer_struct(i, add_page));
+                    }
+                }else{
+                    beer_count++;
+                    $('.beer-container').append(beer_struct(i, add_page));
+                }
             });
 
-            var content_count = Math.round(beer.length/9);                
+            var content_count = Math.round(beer_count/9);                
             for(var k = 0; k < content_count; k++){
                 page_num++;
                 if(page_num === 1){
@@ -55,7 +70,7 @@ $(document).ready(function () {
                 page_num_struct += '<li class="'+active+'" data-page="'+page_increase+'"><a class="page" href="javascript:void(0);">'+page_increase+'</a></li>';                                          
             }
             
-            var remainder = beer.length%9;
+            var remainder = beer_count%9;
             for(var r = 1; r <= remainder; r++){
                 page_increase++;
                 page_num_struct += '<li data-page="'+page_increase+'"><a class="page" href="javascript:void(0);">'+page_increase+'</a></li>';             
@@ -144,21 +159,53 @@ $(document).ready(function () {
 
 
     $.getJSON("http://apichallenge.canpango.com/categories/", function (cat) {
-        for (var i = 0; i < cat.length; i++) {
-            $('#category').append('<option value="'+cat[i] +'">' + cat[i].name + '</option>');
+        for (var i = 0; i < cat.length; i++) {            
+            $('#category').append('<option value="'+ cat[i].url +'">' + cat[i].name + '</option>');
         }
     });
 
+    var validate = function(){
+        var form = $('#addBeer-form'),
+            name = $('#name').val(),
+            abv = $('#abv').val(),
+            brewery_location = $('#brewery_location').val(),
+            category = $('#category').val(),
+            style = $('#style').val(),
+            calories = $('#calories').val(),
+            ibu = $('#ibu').val(),
+            results = false;
+
+            if(name.length!==0
+                && abv.length !== 0
+                && brewery_location.length !== 0
+                && category.length !== 0
+                && style.length !== 0
+                && calories.length !== 0
+                && ibu.length !== 0
+                ){
+                results = true;
+            }
+
+            return results;
+    };
+
     $('#addBeer-form').submit(function(event){
         event.preventDefault();
-        $.ajax({
-            url: '/beers/search/',
-            data: $(this).serialize(),
-            dataType:'json',
-            success: function(){
-                
-            }
-        });
+        if(validate()){
+            $('.form-error').html('');
+            $.ajax({
+                url: 'http://apichallenge.canpango.com/beers/',
+                data: $(this).serialize(),
+                type: 'post',
+                dataType:'json',
+                success: function(r){
+                    console.log(r)
+                }
+            });  
+        }else{
+            $('.form-error').html('<div>Please fill fields</div>');
+        }
+        
 
     });
 });
