@@ -99,8 +99,9 @@ $(document).ready(function () {
                 }
 
                 // Pagination
-                var content_count = Math.round(beer_count/9),
+                var content_count = Math.floor(beer_count/9),
                     remainder = beer_count%9;
+                console.log(content_count);
                 if(beer_count <= 9){
                     page_increase++;
                     page_num_struct += '<li class="active" data-page="'+page_increase+'"><a class="page" href="javascript:void(0);">'+page_increase+'</a></li>';
@@ -128,15 +129,19 @@ $(document).ready(function () {
                         remaining_count = 0, last_count = 0,element_count = 0;
                     for(var count = 1; count <= content_count; count++){ 
                         element_count++;               
-                        for(var inner_count = 0; inner_count < 9; inner_count++){                    
-                            elements[remaining_count].classList.add(element_count);
-                            remaining_count++;
+                        for(var inner_count = 0; inner_count < 9; inner_count++){  
+                            if(elements[remaining_count] != undefined){
+                                elements[remaining_count].classList.add(element_count);
+                                remaining_count++;
+                            }
                         }
                     }
                     element_count++;
                     for(var remain = 1; remain <= remainder; remain++){
-                        elements[remaining_count].classList.add(element_count);
-                        remaining_count++;
+                        if(elements[remaining_count] != undefined){
+                            elements[remaining_count].classList.add(element_count);
+                            remaining_count++;
+                        }
                     }
                 }                               
                 
@@ -233,31 +238,38 @@ $(document).ready(function () {
 
             return results;
     };
-
+    
     $('#addBeer-form').submit(function(event){
         event.preventDefault();
         if(validate()){
             $('.form-error').html('');
+            alertify.set('notifier','position', 'top-right');
             $.ajax({
                 url: 'http://apichallenge.canpango.com/beers/',
                 data: $(this).serialize(),
                 type: 'post',
                 dataType:'json',
-                error: function(){
-                    $('.form-error').html('<div>Something went wrong, please try again</div>');
+                error: function(index, txt, s){
+                    var response = 'Something went wrong, please try again';
+                    console.log(index);
+                    if(index.status == 400){
+                        response = index.responseJSON.name[0];
+                    }
+                    var not = alertify.error(response);
                     $('.addBeer-bottom button').removeClass('disabled').attr('disabled', false);
                 },
                 beforeSend: function(){
                     $('.addBeer-bottom button').addClass('disabled').attr('disabled', true);
                 },
                 success: function(r){
-                    console.log(r)
+                    console.log(r);
                     $('.addBeer-bottom button').removeClass('disabled').attr('disabled', false);
-                    
+                    var not = alertify.success('New beer has been added');
+                    $('#addBeer-form')[0].reset();
                 }
             });  
         }else{
-            $('.form-error').html('<div>Please fill fields</div>');
+            var not = alertify.notify('Please fill fields', 'failure', 5, function(){  console.log('dismissed'); });
         }
         
 

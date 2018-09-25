@@ -6,7 +6,8 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Canpango's Beer Tracking System</title>
         <?php 
-        $other_styles = '<link rel="stylesheet" type="text/css" href="'.base_url('assets/src/alertify/themes/alertify.bootstrap.css').'">';
+        $other_styles = '<link rel="stylesheet" type="text/css" href="'.base_url('assets/src/alertify/css/alertify.min.css').'">';
+        $other_styles .= '<link rel="stylesheet" type="text/css" href="'.base_url('assets/src/alertify/css/themes/bootstrap.min.css').'">';
         include 'assets/includes/links.php'; ?>
     </head>
     <body>
@@ -139,7 +140,7 @@
             </footer>
         </div>
         <?php 
-        $other_scripts = '<script type="text/javascript" src="'.base_url('assets/src/alertify/lib/alertify.min.js').'"></script>';
+        $other_scripts = '<script type="text/javascript" src="'.base_url('assets/src/alertify/alertify.min.js').'"></script>';
         include 'assets/includes/scripts.php'; ?>
     </body>
 </html>
