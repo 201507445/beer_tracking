@@ -89,9 +89,6 @@
                                             <label for="category">Category</label>
                                             <select id="category" name="category" class="form-control">
                                                 <option value="">Select beer category</option>
-                                                <option value="B">B</option>
-                                                <option value="C">C</option>
-                                                <option value="D">D</option>
                                             </select>
                                         </div>
                                         <div class="col-md-6 col-xs-12">

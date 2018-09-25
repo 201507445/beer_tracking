@@ -12,6 +12,13 @@ $(document).ready(function () {
             $('.beer-container').append(html);
         }
     });
+    $.getJSON("http://apichallenge.canpango.com/categories/", function (cat) {
+        for (var i = 0; i < cat.length; i++) {
+            var html = '';
+            html += '<option value="'+cat[i] +'">' + cat[i].name + '</option>';
+            $('#category').append(html);
+        }
+    });
 });
 $.ajax({
     url: ('home/index'),
