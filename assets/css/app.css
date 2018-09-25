@@ -340,3 +340,7 @@ button.navbar-toggle .icon-bar{
     min-height: 202px;
     min-width: 218.88px;
 }
+.pagination>.disabled>a:hover,.pagination>.disabled>a,.pagination>.disabled>a:focus{
+    cursor: default;
+    color: #d2d2d2;
+}
