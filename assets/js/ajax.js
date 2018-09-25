@@ -9,19 +9,11 @@ $(document).ready(function () {
         }
         console.log(toSearch);
     });
-    $.getJSON("http://apichallenge.canpango.com/beers", function (beer) {
-        for (var i = 0; i < beer.length; i++) {
-            for (var key in beer[i]) {
-                //if (beer[i][key].indexOf(toSearch) !== -1) {
-                  //s  results.push(beer[i]);
-               // }
-            }
-        }
-    });
+    $('body').on('click', '.beer-review-link', function (e) {
 
-    $(".beer-review-link").on("click", function(){
-    
-    
-    
-	});
+        $('#myModal').modal('show');
+
+
+
+    });
 });
