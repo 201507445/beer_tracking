@@ -55,10 +55,10 @@ $(document).ready(function () {
                 $('.beer-container').html('');
                 // Display 5 beers per page
                 var count = 0, add_page = '', page_num = 0,
-                    paging = function(page_num_struct){
+                    paging = function(page_num_struct, count){
                         return '<li class="disabled prev"><a href="#" class="paging-btn" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>'+
                                 page_num_struct+
-                                '<li class="next"><a href="#" class="paging-btn" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>';
+                                '<li class="next '+((count === 1)?'disabled':'')+'"><a href="#" class="paging-btn" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>';
                     },
                     active = '',
                     page_num_struct = '',
@@ -101,7 +101,6 @@ $(document).ready(function () {
                 // Pagination
                 var content_count = Math.floor(beer_count/9),
                     remainder = beer_count%9;
-                console.log(content_count);
                 if(beer_count <= 9){
                     page_increase++;
                     page_num_struct += '<li class="active" data-page="'+page_increase+'"><a class="page" href="javascript:void(0);">'+page_increase+'</a></li>';
@@ -144,8 +143,7 @@ $(document).ready(function () {
                         }
                     }
                 }                               
-                
-                $('.beer-pagination .pagination').append(paging(page_num_struct));
+                $('.beer-pagination .pagination').append(paging(page_num_struct, page_increase));
             }
         });
     }
