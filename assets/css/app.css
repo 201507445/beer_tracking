@@ -346,10 +346,15 @@ button.navbar-toggle .icon-bar{
 }
 .widget ul li{
     list-style: square;
-
     margin-bottom: 0px;
-
     color: #fff;
+}
+.widget ul li a{
+    color: #fff;
+    font-size: 14px;
+}
+.widget ul li a:hover{
+    color: #ecd1eb;
 }
 .widget ul{
     padding-left: 3px;

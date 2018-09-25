@@ -14,9 +14,9 @@ $(document).ready(function () {
         return '<div class="col-md-3 beer beer-placeholder"></div>';
     };
     load_beers();
-
+    var page_increase = 0;
     function load_beers(){
-        var last_count = 0,element_count = 0, page_increase = 0,
+        var last_count = 0,element_count = 0,
         location = window.location,
         category = location.search,
         category_id = 0,
