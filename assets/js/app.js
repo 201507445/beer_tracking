@@ -16,8 +16,7 @@ $(document).ready(function () {
     load_beers();
     var page_increase = 0;
     function load_beers(){
-        var last_count = 0,element_count = 0,
-        location = window.location,
+        var location = window.location,
         category = location.search,
         category_id = 0,
         url = "http://apichallenge.canpango.com/beers/", data = {}, query = '';
@@ -57,7 +56,9 @@ $(document).ready(function () {
                 // Display 5 beers per page
                 var count = 0, add_page = '', page_num = 0,
                     paging = function(page_num_struct){
-                        return page_num_struct;
+                        return '<li class="disabled prev"><a href="#" class="paging-btn" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>'+
+                                page_num_struct+
+                                '<li class="next"><a href="#" class="paging-btn" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>';
                     },
                     active = '',
                     page_num_struct = '',
@@ -96,38 +97,49 @@ $(document).ready(function () {
                     var html = '<div class="col-md-12 no-beers"><h2>No beers found</h2>'+base_link+'</div>';
                     $('.beer-container').html(html);
                 }
-                var content_count = Math.round(beer_count/9);                
-                for(var k = 0; k < content_count; k++){
-                    page_num++;
-                    if(page_num === 1){
-                        active = 'active';
-                    }else{
-                        active = '';
-                    } 
-                    page_increase++;
-                    page_num_struct += '<li class="'+active+'" data-page="'+page_increase+'"><a class="page" href="javascript:void(0);">'+page_increase+'</a></li>';                                          
-                }
-                
-                var remainder = beer_count%9;
-                for(var r = 1; r <= remainder; r++){
-                    page_increase++;
-                    page_num_struct += '<li data-page="'+page_increase+'"><a class="page" href="javascript:void(0);">'+page_increase+'</a></li>';             
-                }
 
-                var elements =  $('.beer-container .beer'),
-                    remaining_count = 0;
-                for(var count = 1; count <= content_count; count++){ 
-                    element_count++;               
-                    for(var inner_count = 0; inner_count < 9; inner_count++){                    
+                // Pagination
+                var content_count = Math.round(beer_count/9),
+                    remainder = beer_count%9;
+                if(beer_count <= 9){
+                    page_increase++;
+                    page_num_struct += '<li class="active" data-page="'+page_increase+'"><a class="page" href="javascript:void(0);">'+page_increase+'</a></li>';
+                }else{
+                    for(var k = 0; k < content_count; k++){
+                        page_num++;
+                        if(page_num === 1){
+                            active = 'active';
+                        }else{
+                            active = '';
+                        } 
+                        page_increase++;
+                        page_num_struct += '<li class="'+active+'" data-page="'+page_increase+'"><a class="page" href="javascript:void(0);">'+page_increase+'</a></li>';                                          
+                    }
+                    var remainder_count = 1;
+                    if(remainder <= 9){
+                        remainder_count = 1;
+                    }
+                    for(var r = 1; r <= remainder_count; r++){
+                        page_increase++;
+                        page_num_struct += '<li data-page="'+page_increase+'"><a class="page" href="javascript:void(0);">'+page_increase+'</a></li>';             
+                    }
+
+                    var elements =  $('.beer-container .beer'),
+                        remaining_count = 0, last_count = 0,element_count = 0;
+                    for(var count = 1; count <= content_count; count++){ 
+                        element_count++;               
+                        for(var inner_count = 0; inner_count < 9; inner_count++){                    
+                            elements[remaining_count].classList.add(element_count);
+                            remaining_count++;
+                        }
+                    }
+                    element_count++;
+                    for(var remain = 1; remain <= remainder; remain++){
                         elements[remaining_count].classList.add(element_count);
                         remaining_count++;
                     }
-                }
-                for(var remain = 1; remain <= remainder; remain++){
-                    element_count++;
-                    elements[remaining_count].classList.add(element_count);
-                }
-                last_count = element_count;
+                }                               
+                
                 $('.beer-pagination .pagination').append(paging(page_num_struct));
             }
         });
@@ -139,17 +151,17 @@ $(document).ready(function () {
         load_beers();
     });
 
-    var pages_count = $('.pagination li');
     $('body').on('click', '.beer-pagination li a', function(event){
         event.preventDefault();
         var _this = $(this),
             _parent = _this.parent(),
-            _pageClass = _parent.text();
+            _pageClass = _parent.text(),
+            _prev = $('.pagination .prev'),
+            _next = $('.pagination .next');
         if(_parent.hasClass('disabled')) return false;
 
         if(!_this.hasClass('page')) return false;
 
-        // console.log(page_increase);
         if(_pageClass.trim() != ''){
             $('.pagination li').removeClass('active');
             _parent.addClass('active');
@@ -157,18 +169,34 @@ $(document).ready(function () {
             $('.beer.'+_pageClass, '.beer-container').removeClass('hide'); 
         }
         var page_number = parseInt(_parent.attr('data-page'));
-        // console.log(page_number);
         if(page_number == page_increase){
-            $('.nav-beers.next','.beer-pagination').removeClass('disabled');
+            _next.addClass('disabled');
+            _prev.removeClass('disabled');
+        }else if(page_number === 1){
+            _prev.addClass('disabled');
+            _next.removeClass('disabled');
+        }else{
+            _next.removeClass('disabled');
+            _prev.removeClass('disabled');
         }
-        if(page_number === 1){
-            $('.nav-beers.prev','.beer-pagination').addClass('disabled');
-        }else if(page_number=== 0){
-            $('.nav-beers.prev','.beer-pagination').addClass('disabled');
-        }
+    });
 
+    $('body').on('click', '.beer-pagination .paging-btn', function(event){
+        event.preventDefault();
+        var _this = $(this),
+            _parent = _this.parent(),
+            _prev = $('.pagination .prev'),
+            _next = $('.pagination .next');
+        if(_parent.hasClass('disabled')) return false;
 
-        // console.log(_this.text());
+        // Find active element
+
+        var active_element = $('.pagination li.active', '.beer-pagination');
+        if(_parent.hasClass('prev')){
+            active_element.prev().find('a').click();
+        }else if(_parent.hasClass('next')){
+            active_element.next().find('a').click();
+        }        
     });
 
 
