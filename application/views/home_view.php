@@ -33,9 +33,20 @@
                     <main class="col-md-9" id="mainContent">
                         <h1>Beer Tracking System</h1>
                         <h2>Keeping Track Of Everyone's Favourite Beer</h2>
-                        <div class="row beer-container">
+                        <?php
+                            $param = '';
+                            if(isset($_GET['category'])){
+                                $param = $_GET['category'];                                
+                            }else if(isset($_GET['q'])){
+                                $param = $_GET['q'];
+                            }
 
-                        </div>
+                            if($param != ''){
+                                echo '<div class="remove-filter"><a href="./">Empty filtering</a></div>';
+                            }
+                        ?>
+                        
+                        <div class="row beer-container"></div>
                         <div class="beer-pagination">
                             <nav aria-label="Page navigation">
                                 <ul class="pagination"></ul>
@@ -105,8 +116,8 @@
                             <div class="widget">
                                 <h2>Search</h2>
                                 <div class="side-search">
-                                    <form action="" method="post">                                        
-                                        <input type="search" id="searchField" class="form-control" placeholder="Search Beer" aria-describedby="search-beer">
+                                    <form id="search-form" action="<?=base_url('')?>" method="get">                                       
+                                        <input type="search" id="searchField" class="form-control" placeholder="Search Beer" aria-describedby="search-beer" name="q">
                                         <button type="submit" name="search-beer" id="search-beer"><i class="fa fa-search"></i></button>
                                     </form>
                                 </div>

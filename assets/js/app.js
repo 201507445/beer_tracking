@@ -13,85 +13,130 @@ $(document).ready(function () {
     beer_placeholder = function(){
         return '<div class="col-md-3 beer beer-placeholder"></div>';
     };
-    var last_count = 0,element_count = 0, page_increase = 0,
-    category = window.location.search,
-    category_id = 0,
-    url = '';
-    category = category.replace('?', '').split('=');
-    category_id = (category[1] !== undefined)? category[1]:0;
-    $.ajax({
-        url: "http://apichallenge.canpango.com/beers/",
-        dataType: 'json',
-        beforeSend: function(){
-            $('.beer-pagination ul li').addClass('disabled');
-            for(var i = 0; i <= 5; i++){
-                $('.beer-container').append(beer_placeholder());
-            }
-        },
-        success: function(beer){
-            $('.beer-container').html('');
-            // Display 5 beers per page
-            var count = 0, add_page = '', page_num = 0,
-                paging = function(page_num_struct){
-                    return page_num_struct;
-                },
-                active = '',
-                page_num_struct = '',
-                content_count = 0,
-                beer_count = 0,
-                category_url = '';
+    load_beers();
 
-            $.each(beer, function(index, i){
-                count++;
-                if(count > 9){
-                    add_page = 'hide';
-                }
-                if(category_id !== 0){
-                    category_url = "http://apichallenge.canpango.com/category/"+category_id+'/';
-                    if(i.category == category_url){
-                        beer_count++;
-                        $('.beer-container').append(beer_struct(i, add_page));
-                    }
-                }else{
-                    beer_count++;
-                    $('.beer-container').append(beer_struct(i, add_page));
-                }
-            });
-
-            var content_count = Math.round(beer_count/9);                
-            for(var k = 0; k < content_count; k++){
-                page_num++;
-                if(page_num === 1){
-                    active = 'active';
-                }else{
-                    active = '';
-                } 
-                page_increase++;
-                page_num_struct += '<li class="'+active+'" data-page="'+page_increase+'"><a class="page" href="javascript:void(0);">'+page_increase+'</a></li>';                                          
+    function load_beers(){
+        var last_count = 0,element_count = 0, page_increase = 0,
+        location = window.location,
+        category = location.search,
+        category_id = 0,
+        url = "http://apichallenge.canpango.com/beers/", data = {}, query = '';
+        category = category.replace('?', '').split('=');
+        query = category[0];
+        
+        if(category.length > 1){
+            
+            category = category[1].split('&');
+            category_id = (category[0] !== undefined && category[0].length !== 0)? category[0]:0;
+            if(query == 'q' && category_id !== 0){
+                url = "http://apichallenge.canpango.com/beers/search/";
+                data = {
+                    q: decodeURI(category_id) 
+                };
             }
             
-            var remainder = beer_count%9;
-            for(var r = 1; r <= remainder; r++){
-                page_increase++;
-                page_num_struct += '<li data-page="'+page_increase+'"><a class="page" href="javascript:void(0);">'+page_increase+'</a></li>';             
-            }
+        }    
 
-            var elements =  $('.beer-container .beer'),
-                remaining_count = 0;
-            for(var count = 1; count <= content_count; count++){ 
-                element_count++;               
-                for(var inner_count = 0; inner_count < 9; inner_count++){                    
-                    elements[remaining_count].classList.add(element_count);
-                    remaining_count++;
+        $.ajax({
+            url: url,
+            dataType: 'json',
+            data: data,
+            error: function(){
+                $('.beer-container').html('<div class="col-md-12 no-beers"><h2>Someting went wrong, try again</h2>'+
+                                        '<div class="text-center"><a class="page-reload" href="'+location.href+'">Reload page</a></div>'+
+                                        '</div>');
+            },
+            beforeSend: function(){
+                $('.beer-pagination ul li').addClass('disabled');
+                for(var i = 0; i <= 5; i++){
+                    $('.beer-container').append(beer_placeholder());
                 }
+            },
+            success: function(beer){
+                $('.beer-container').html('');
+                // Display 5 beers per page
+                var count = 0, add_page = '', page_num = 0,
+                    paging = function(page_num_struct){
+                        return page_num_struct;
+                    },
+                    active = '',
+                    page_num_struct = '',
+                    content_count = 0,
+                    beer_count = 0,
+                    category_url = '';
+                $.each(beer, function(index, i){
+                    
+                    var search_c = 0;
+                    if(query == 'category'){
+                        search_c = 1;
+                    }
+                    if(search_c !== 0){
+                        category_url = "http://apichallenge.canpango.com/category/"+category_id+'/';
+                        if(i.category == category_url){
+                            beer_count++;
+                            if(beer_count > 9){
+                                add_page = 'hide';
+                            }
+                            $('.beer-container').append(beer_struct(i, add_page));
+                        }
+                    }else{
+                        beer_count++;
+                        if(beer_count > 9){
+                            add_page = 'hide';
+                        }
+                        $('.beer-container').append(beer_struct(i, add_page));
+                    }
+                });
+
+                if(beer_count === 0){
+                    var base_link = '';
+                    if(category_id!== 0){
+                        base_link = '<div class="text-center"><a href="./">Remove filter</a></div>';
+                    }
+                    var html = '<div class="col-md-12 no-beers"><h2>No beers found</h2>'+base_link+'</div>';
+                    $('.beer-container').html(html);
+                }
+                var content_count = Math.round(beer_count/9);                
+                for(var k = 0; k < content_count; k++){
+                    page_num++;
+                    if(page_num === 1){
+                        active = 'active';
+                    }else{
+                        active = '';
+                    } 
+                    page_increase++;
+                    page_num_struct += '<li class="'+active+'" data-page="'+page_increase+'"><a class="page" href="javascript:void(0);">'+page_increase+'</a></li>';                                          
+                }
+                
+                var remainder = beer_count%9;
+                for(var r = 1; r <= remainder; r++){
+                    page_increase++;
+                    page_num_struct += '<li data-page="'+page_increase+'"><a class="page" href="javascript:void(0);">'+page_increase+'</a></li>';             
+                }
+
+                var elements =  $('.beer-container .beer'),
+                    remaining_count = 0;
+                for(var count = 1; count <= content_count; count++){ 
+                    element_count++;               
+                    for(var inner_count = 0; inner_count < 9; inner_count++){                    
+                        elements[remaining_count].classList.add(element_count);
+                        remaining_count++;
+                    }
+                }
+                for(var remain = 1; remain <= remainder; remain++){
+                    element_count++;
+                    elements[remaining_count].classList.add(element_count);
+                }
+                last_count = element_count;
+                $('.beer-pagination .pagination').append(paging(page_num_struct));
             }
-            for(var remain = 1; remain <= remainder; remain++){
-                element_count++;
-                elements[remaining_count].classList.add(element_count);
-            }
-            last_count = element_count;
-            $('.beer-pagination .pagination').append(paging(page_num_struct));
-        }
+        });
+    }
+
+    $('body').on('click', '.page-reload', function(event){
+        event.preventDefault();
+        $('.no-beers').remove();
+        load_beers();
     });
 
     var pages_count = $('.pagination li');
@@ -127,41 +172,13 @@ $(document).ready(function () {
     });
 
 
-    $('#searchField').keyup(function () {
-        var input, filter, ul, li, a, i, count = 0;
-        input = $(this);
-        filter = input.val().toUpperCase();
-        container = $(".beer-container");
-        beer = container.find('div.beer');
-        if (beer.length !== 0) {
-            // Loop through all list items, and hide those who don't match the search query
+    $('#search-form').submit(function (event) {
+        event.preventDefault();
+        var val = $(this).find('#searchField').val();
+        if(val.length === 0) return false;
+        
+        window.location.replace('?q='+val);        
 
-            for (i = 0; i < beer.length; i++) {
-                a = beer[i].getElementsByClassName("__l")[0];
-                if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
-                    beer[i].style.display = "";
-                    count++;
-                } else {
-                    beer[i].style.display = "none";
-                }
-            }
-            if (count === 0) {
-                if (container.find('._cLno_r').length === 0) {
-                    container.prepend('<div class="row _cLno_r">' +
-                            '<ul><li class="no-info">No results</li></ul></div>');
-                }
-            } else {
-                container.find('._cLno_r').remove();
-            }
-        }
-
-    });
-
-
-    $.getJSON("http://apichallenge.canpango.com/categories/", function (cat) {
-        for (var i = 0; i < cat.length; i++) {            
-            $('#category').append('<option value="'+ cat[i].url +'">' + cat[i].name + '</option>');
-        }
     });
 
     var validate = function(){

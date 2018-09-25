@@ -365,3 +365,27 @@ button.navbar-toggle .icon-bar{
     margin-bottom: 13px;
     font-size: 13px;
 }
+.no-beers{
+    margin: 50px 0 30px;
+}
+.no-beers h2{
+    font-weight: 400;
+    color: #969696;
+    margin-bottom: 0;
+}
+.no-beers a{
+    color: #4ea1ea;
+    font-size: 13px;
+}
+.remove-filter a{
+    font-size: 14px;
+    color: #4ea1ea;
+}
+.no-cate{
+    text-align: center;
+    font-size: 13px;
+    color: #e0e0e0 !important;
+}
+.no-cate a{
+    color: #e0e0e0 !important;
+}
