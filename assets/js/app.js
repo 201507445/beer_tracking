@@ -148,4 +148,17 @@ $(document).ready(function () {
             $('#category').append('<option value="'+cat[i] +'">' + cat[i].name + '</option>');
         }
     });
+
+    $('#addBeer-form').submit(function(event){
+        event.preventDefault();
+        $.ajax({
+            url: '/beers/search/',
+            data: $(this).serialize(),
+            dataType:'json',
+            success: function(){
+                
+            }
+        });
+
+    });
 });

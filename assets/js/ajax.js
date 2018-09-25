@@ -1,23 +1,3 @@
-<<<<<<< HEAD
-$(".beer-review-link").on("click", function(){
-    
-    
-    
-});
-$(function(){
-	$('#addBeer-form').submit(function(event){
-		event.preventDefault();
-		$.ajax({
-			url: '/beers/search/',
-			data: $(this).serialize(),
-			dataType:'json',
-			success: function(){
-				
-			}
-		});
-
-	});
-=======
 $(document).ready(function () {
     var toSearch = {};
     $.getJSON("http://apichallenge.canpango.com/categories/", function (cat) {
@@ -39,5 +19,9 @@ $(document).ready(function () {
         }
     });
 
->>>>>>> dfdc2800b213a116fceb9e86a95dcaf04f074c99
+    $(".beer-review-link").on("click", function(){
+    
+    
+    
+	});
 });
