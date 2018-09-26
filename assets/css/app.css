@@ -204,12 +204,28 @@ footer p {
     cursor: pointer;
     float: none;
     transition: box-shadow 0.2s ease-in-out;
+    position: relative;
 }
-.beer:hover{
+@media (max-width: 690px){
+    .beer{
+        width: 45%;
+    }
+}
+.beer.activated:hover{
     box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.38);
 }
-.beer:active{
+.beer.activated:active{
     box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.23);
+}
+.beer-delete{
+    position: absolute;
+    right: 25px;
+    top: 6px;
+    color: #f1cbcb;
+    transition: color 0.2s ease-in-out;
+}
+.beer.activated:hover .beer-delete{
+    color: #f53d3d;
 }
 .beer a{
     text-align: right;
@@ -283,11 +299,10 @@ fieldset label{
     font-weight: 400;
     font-size: 15px;
 }
-fieldset input, fieldset select{
+input.form-control, select.form-control, textarea.form-control{
     border-color: #d8d6d6 !important;
-
 }
-fieldset input:focus, fieldset select:focus{
+input.form-control:focus, select.form-control:focus, textarea.form-control:focus{
     box-shadow: none !important;
     border-color: #c1c1c1 !important;
 }
@@ -393,4 +408,30 @@ button.navbar-toggle .icon-bar{
 }
 .no-cate a{
     color: #e0e0e0 !important;
+}
+.modal-header{
+    padding: 10px 15px;
+}
+._modal_loader{
+    text-align: center;
+    margin: 25px 0;
+}
+._modal_loader img{
+    height: 25px;
+}
+._modal_content label{
+    font-weight: 400;
+    font-size: 14px;
+    margin-bottom: 0;
+}
+._modal_content input{
+    margin-bottom: 10px;
+}
+.modal_add_review textarea{
+    height: 190px;
+    resize: none;
+}
+._dialog_modal .modal-body{
+    padding: 20px;
+    padding-top: 30px;
 }

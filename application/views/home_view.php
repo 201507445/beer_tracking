@@ -88,7 +88,7 @@
                                     <div class="row">
                                         <div class="col-md-6 col-xs-12">
                                             <label for="category">Category</label>
-                                            <select id="category" required="1" name="category" class="form-control">
+                                            <select id="category" required="1" name="category" class="form-control category">
                                                 <option value="">Select beer category</option>
                                             </select>
                                         </div>
@@ -140,6 +140,8 @@
             </footer>
         </div>
         <?php 
+        require 'assets/includes/modals/review.php';
+        require 'assets/includes/modals/dialog_modal.php';
         $other_scripts = '<script type="text/javascript" src="'.base_url('assets/src/alertify/alertify.min.js').'"></script>';
         include 'assets/includes/scripts.php'; ?>
     </body>

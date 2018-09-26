@@ -1,21 +1,28 @@
 $(document).ready(function () {
     var beer_struct = function(beer, add_page){
-        var html = '<div class="col-md-3 beer '+add_page+'">';
+        var html = '<div class="col-md-3 col-xs-3 beer activated '+add_page+'">';
+            html += '<div class="beer-delete" title="Delete this beer!"><i class="fa fa-trash"></i></div>';
             html += '<div class="text-center"><b class="__l">' + beer.name + '</b></div>';
             html += '<p><b> Ibu:</b> <span>' + beer.ibu + '</span></p>';
             html += '<p><b>Abv:</b> <span>' + beer.abv + '</span></p>';
             html += '<p><b>Style:</b> <span>' + beer.style + '</span></p>';
             html += '<p><b>Location:</b> <span>' + beer.brewery_location + '</span></p>';
             html += '<p><b>Calories:</b> <span>' + beer.calories + '</span></p>';
-            html += '<div class="beer-review-link"><a href="#">Reviews</a></div>';
+            html += '<div class="beer-review-link"><a data-src="'+beer.url+'" href="#">Reviews</a></div>';
+            html += '</div>';
         return html;
     },
     beer_placeholder = function(){
         return '<div class="col-md-3 beer beer-placeholder"></div>';
     };
+    alertify.set('notifier','position', 'top-right');
     load_beers();
     var page_increase = 0;
-    function load_beers(){
+    function load_beers(reset){
+
+        if(reset != undefined){
+            page_increase = 0;
+        }
         var location = window.location,
         category = location.search,
         category_id = 0,
@@ -142,7 +149,8 @@ $(document).ready(function () {
                             remaining_count++;
                         }
                     }
-                }                               
+                }  
+                $('.beer-pagination .pagination').html('');                             
                 $('.beer-pagination .pagination').append(paging(page_num_struct, page_increase));
             }
         });
@@ -152,6 +160,43 @@ $(document).ready(function () {
         event.preventDefault();
         $('.no-beers').remove();
         load_beers();
+    });
+
+    $('body').on('click', '.beer-delete', function(event){
+        var url = $(this).parent().find('.beer-review-link a').attr('data-src'),
+            _modal = $('._dialog_modal');
+        _modal.find('#beer_url').val(url);
+        _modal.modal();
+    });
+
+    $('#beer-delete-form').on('submit', function(event){
+        event.preventDefault();
+        var _this = $(this),
+            _url = _this.find('#beer_url').val();
+        $.ajax({
+            url: _url,
+            data: $(this).serialize(),
+            type: 'delete',
+            dataType:'json',
+            error: function(index, txt, s){
+                var response = 'Something went wrong, please try again';
+                if(index.status == 400){
+                    response = index.responseJSON.name[0];
+                }
+                alertify.error(response);
+                $('.modal-footer button').removeClass('disabled').attr('disabled', false);
+            },
+            beforeSend: function(){
+                $('.modal-footer button').addClass('disabled').attr('disabled', true);
+            },
+            success: function(r){
+                $('.modal-footer button').removeClass('disabled').attr('disabled', false);
+                alertify.success('Beer has been deleted');
+                _this[0].reset();
+                load_beers('reset');
+                $('._dialog_modal').modal('hide');
+            }
+        });
     });
 
     $('body').on('click', '.beer-pagination li a', function(event){
@@ -241,7 +286,7 @@ $(document).ready(function () {
         event.preventDefault();
         if(validate()){
             $('.form-error').html('');
-            alertify.set('notifier','position', 'top-right');
+            
             $.ajax({
                 url: 'http://apichallenge.canpango.com/beers/',
                 data: $(this).serialize(),
@@ -249,7 +294,6 @@ $(document).ready(function () {
                 dataType:'json',
                 error: function(index, txt, s){
                     var response = 'Something went wrong, please try again';
-                    console.log(index);
                     if(index.status == 400){
                         response = index.responseJSON.name[0];
                     }
@@ -260,7 +304,6 @@ $(document).ready(function () {
                     $('.addBeer-bottom button').addClass('disabled').attr('disabled', true);
                 },
                 success: function(r){
-                    console.log(r);
                     $('.addBeer-bottom button').removeClass('disabled').attr('disabled', false);
                     var not = alertify.success('New beer has been added');
                     $('#addBeer-form')[0].reset();
@@ -269,7 +312,104 @@ $(document).ready(function () {
         }else{
             var not = alertify.notify('Please fill fields', 'failure', 5, function(){  console.log('dismissed'); });
         }
-        
+    });
 
+    $('.__modal_edit').click(function(){
+        var drl = $(this).attr('data-drl');
+        if(drl == 'forward'){
+            $('.modal_reviews, .modal_add_review', '._review_modal').addClass('hide');
+            $('.modal_edit', '._review_modal').removeClass('hide');
+            $(this).html('Go Back').attr('data-drl', 'back');
+            $('.__modal_add_review').html('Save').attr('data-action', 'edit-beer');
+
+        }else if(drl == 'back'){
+            $('.modal_edit, .modal_add_review', '._review_modal').addClass('hide');
+            $('.modal_reviews', '._review_modal').removeClass('hide');
+            $(this).html('Edit Beer').attr('data-drl', 'forward');
+            $('.__modal_add_review').html('Add Review').attr('data-action', 'add-review');
+            $('#beer-review-form textarea').val('');
+        }
+    });
+    $('.__modal_add_review').click(function(){
+        var drl = $(this).attr('data-action');
+
+        if(drl == 'add-review'){
+            $('.modal_edit, .modal_reviews', '._review_modal').addClass('hide');
+            $('.modal_add_review', '._review_modal').removeClass('hide');
+            $(this).html('Send Review').attr('data-action', 'send-review');
+            $('.__modal_edit').html('Cancel').attr('data-drl', 'back');
+        }else if(drl == 'send-review'){
+
+            // Submit review
+            $('#beer-review-form').submit();
+        }else if(drl == 'edit-beer'){
+
+            // Edit beer
+            $('#modal_edit_form').submit();
+        }
+        
+    });
+
+    $('#modal_edit_form').submit(function(e){
+        e.preventDefault();
+        var footer_btn = $('.modal-footer button'),
+            url = $(this).find('.modal_url').val();
+        $.ajax({
+            url: url,
+            data: $(this).serialize(),
+            type: 'put',
+            dataType:'json',
+            error: function(index, txt, s){
+                var response = 'Something went wrong, please try again';
+                if(index.status == 400){
+                    response = index.responseJSON.name[0];
+                }
+                var not = alertify.error(response);
+                footer_btn.removeClass('disabled').attr('disabled', false);
+            },
+            beforeSend: function(){
+                footer_btn.addClass('disabled').attr('disabled', true);
+            },
+            success: function(r){
+                footer_btn.removeClass('disabled').attr('disabled', false);
+                var not = alertify.success('Edits are saved');
+                load_beers('reset');
+                $('._review_modal').modal('hide');
+            }
+        }); 
+    });
+
+    $('#beer-review-form').submit(function(e){
+        e.preventDefault();
+        var url = $(this).find('.modal_url').val(),
+            footer_btn = $('.modal-footer button');
+        if($(this).find('textarea').val().length === 0){
+            alertify.error('Please write your review');
+            return false;
+        }
+        $.ajax({
+            url: url,
+            data: $(this).serialize(),
+            type: 'put',
+            dataType:'json',
+            error: function(index, txt, s){
+                var response = 'Something went wrong, please try again';
+                if(index.status == 400){
+                    console.log(index.responseJSON);
+                    response = index.responseJSON.category[0];
+                }
+                alertify.error(response);
+                footer_btn.removeClass('disabled').attr('disabled', false);
+            },
+            beforeSend: function(){
+                footer_btn.addClass('disabled').attr('disabled', true);
+            },
+            success: function(r){
+                footer_btn.removeClass('disabled').attr('disabled', false);
+                alertify.success('Review submitted');
+                // load_beers();
+                // $('._review_modal').modal('hide');
+            }
+        });
     });
 });
