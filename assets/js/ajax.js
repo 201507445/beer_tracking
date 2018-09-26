@@ -56,13 +56,13 @@ $(document).ready(function () {
         });
         
     });
-    
+
     $('._review_modal').on('hidden.bs.modal', function(){
         $('.modal_edit, .modal_add_review', '._review_modal').addClass('hide');
         $('.modal_reviews', '._review_modal').removeClass('hide');
         $('.__modal_edit', '._review_modal').attr('data-drl', 'forward').html('Edit Beer');
         $('.__modal_add_review', '._review_modal').attr('data-action', 'add-review').html('Add Review');
-        $('._modal_content, .modal-footer').addClass('hide');
+        $('._modal_content, ._review_modal .modal-footer').addClass('hide');
         $('._modal_loader').removeClass('hide');
         $('#beer-review-form')[0].reset();
     });
